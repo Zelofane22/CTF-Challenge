@@ -1,0 +1,35 @@
+# Trame 
+4500 0054 0000 4000 4001 XXXX c0a8 0101  
+0a00 0001 0800 YYYY ce47 0001 2cfa 154d  
+0000 0000 2d60 0500 0000 0000 5a45 4e4b  
+2053 4543 5552 4954 5920 2d20 4348 4543  
+4b53 554d 202d 2070 6172 2043 4153 4320  
+2020 2020
+
+[5a45 : ] => ZENK SECURITY - CHECKSUM - par CASC
+
+XXXX = 6eff (ip header checsum)
+YYYY = 317b (icmp header checsum)
+XXXXYYYY = 6effc7f
+La trame donnée semble être une trame réseau, peut-être au format hexadecimal. Voici ce que nous pouvons en tirer :
+
+-   Les premiers quatre octets "4500" représentent la version du protocole IP (Internet Protocol version 4).
+-   Les octets suivants "0054" représentent la longueur totale de la trame en octets.
+-   Les quatre octets suivants "0000 4000" représentent l'identifiant unique (ID) du paquet.
+-   Les deux octets suivants "4001" représentent le type de protocole utilisé (ici, le protocole ICMP).
+-   Les quatre octets suivants "c0a8 0101" représentent l'adresse IP source.
+-   Les quatre octets suivants "0a00 0001" représentent l'adresse IP de destination.
+-   Les deux octets suivants "0800" représentent le type de message ICMP (ici, Echo Request).
+-   Les deux octets suivants "YYYY" représentent le checksum ICMP (valeur manquante).
+-   Les quatre octets suivants "ce47 0001" représentent l'identifiant de demande d'écho ICMP.
+-   Les quatre octets suivants "2cfa 154d" représentent le numéro de séquence ICMP.
+-   Les octets suivants "0000 0000 2d60 0500 0000 0000 5a45 4e4b" représentent les données utiles du message ICMP (ici, "ZENK SECURITY - CASC").
+-   Les derniers octets représentent des données supplémentaires ou de remplissage.
+
+Il est important de noter que les informations spécifiques contenues dans les champs "XXXX" et "YYYY" manquants dépendent du type de message ICMP et du contexte de la communication.
+
+
+Le texte ci-dessous de langue française est chiffré. Le but est de trouver la clé qui a permis de chiffrer le message. Avec la clé tu es censés déchiffrer le texte.
+Le texte chiffré:  
+  
+NIMGM IWYVC DLMLZ XNHHT MCWFD YWEXB QZMGB WNGXZ UTGER GXQPC ZACMV DNRNA QCCKZ XHESW GRWUA ICTUQ ZCQIR PUEVM OUZBK IRRIW DMIMZ UDIQW GSAHD QNWGM ETWNT LNWDB AUBWV WOSXQ ZECKJ RXYVM JPMKZ QNRWW ZSIMF YCZDM FNWNJ TJVWI SEWGJ WJRVI GTZXJ VNWWZ UCBBF RBUXM XEZXJ TNGWV ATZXJ MCIUM BEZMF VRIQW ETCMF WJVWQ OLMLZ ROSUU MTQYJ ICEXB DEAMV BCIVB QCPGZ UDIVW GNWGT IBXOM OOBXG EAXDO QDMGF XAIFW YMCGR YCISW GRBTE XNXYW GSDHL WNRUM ZDZXQ ZRXHK AMXMV RXYVK GLBBM SWWOI PIAVI ICMRV QTTTH YJPLB QLMII MWGLX MLKHE XNRXL QNWMI IOSUC YNMLK ELGHA EIJEV UDEXF YEUUI IBHHV ATZXT SVQXV MUBXC EAELA ANMLK WRQST QCMKK ERRVA MVWBI WWIVW ZTXTJ EYPDK QRMGK VNXRC FEAEV WVELV EQCBU HNWDK TAZGV WMYQM GTWIZ IMYSI DTIZV EUSUA ZOBKV TXWLB UOVXJ XJQEQ SUMGF YBHHD ANAER HVIWB DEVHL WYVRV ANAEV TJVWI SELXJ GXRQI USATE GNWVI ZSZXJ XAMFB UOVLT IBXOI BIMKI IJRJC XAQKV HNPDK AMUNE EDXHU MIAGF YBRHA AMUXJ TJWDD QUOEV WJYSW UNBWV TNRVM DQCXK SDWRV FLQGK IUPLO QNKXF YUEPI FUZBK IWIFM ESIBI IJPXB ULQLR XRSQR GDQVZ IDWHL GNATM SRVTC UPIKU IOMQQ FIWGV WCRHC FRMYF VCHXK ANAMR XZYHT MCWGE SCEWQ ANLNJ EESLZ PEXXE HJZDV FTWNK HNPDU ARIEZ XNIWL QLIYI EWGKQ EEMGM IAWOC UMMFV HNPXB ULQLR XNYUV AUAII IOIUW ZSZXJ IAZHZ OEATM SRVSW GRKXL BZYLA ANBTG XNWDT GTQEZ WNVSW GRTXS MNRFW YMCGR VKMWZ MIZXT IAXHA YAQLR ZNDYW GSUBV YGESZ APWLV VUIVI HOQKV WCYQM MRUXR YCEQB CUMEV WVSWA AUTTT MNVHB ZOCLE IBSPU QSXTJ YWIDZ YUZXI MNPDK AMUNE EDXHV QSBIR WLSQA UDMKV IYEUA QSUXD FAIVK AMUXL RNRLM YETBV YMIOM QCPTK SDXYI ZOCLG EAXDO QOVLI INPOM YEVMV XWSWZ QCZXU SWSWZ QDWZD ILIVB PAXIF VCIUK QQCXE SDWSW GVWGJ HJRVT MMMLL VNHHV ASUHP IWWHB PEVHL WNPHD QROKR GNEXF OOVMI MKYWQ ANAWV WJYWZ QSUXD FAIVL GPIKK EPIQM QLIIG VNRWQ ESIZV ICHHT MPXKV RCMVA MGMGV IUISI DTIZV RXYVV QCPXI GQSQA BAATJ EESLZ CUQWV PDRDM ZGMGU VNPDC FRMXE TAIPQ QRVHL WWSXA OOVMV RCSQA PEVMI ICIQQ DLIUF YLPHI UNABW SAQHM QTLXG VXKUM ESMKV RWSXA MILTE XUIVC ZSTXJ EDXUM ESQFG PNQHV FLMFF XMISI ESMXJ XEMJM ZEZXT IBXII OITX
