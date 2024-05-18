@@ -118,7 +118,7 @@ Pour résoudre cette vulnérabilité, vous devez restreindre les algorithmes de 
 Pour que l'injection puisse être effectuer il faudrait pouvoir insérer des injections sql dans le token et créer un jeton JWT valide avec la clé publique.
 ## création d'un jeton valide
 Je vais donc décoder mon token (généré après inscription sur l'application web) avec le décodeur de cookie JWT :  [jwt.io](https://jwt.io/)
-![[Pasted image 20240518150314.png]]
+![Pasted image 20240518150314](https://github.com/Zelofane22/CTF-Challenge/assets/80983303/1432cdaf-1692-4a11-a5fa-ef2b8e675266)
 
 Il existe un outil qui permet d'exploiter un token [jwt](https://github.com/ticarpi/jwt_tool)
 ```bash
